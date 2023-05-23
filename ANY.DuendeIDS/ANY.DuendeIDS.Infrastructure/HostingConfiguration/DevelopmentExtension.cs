@@ -1,5 +1,7 @@
+using ANY.DuendeIDS.Infrastructure.Persistence;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Validation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -9,9 +11,8 @@ public static class DevelopmentExtension
 {
     public static void ConfigDevelopExtension(this IServiceCollection services)
     {
-       
-            services.AddTransient<IRedirectUriValidator, RedirectValidator>();
-        
+        services.AddDbContext<ApplicationDbContext>(options => { options.UseInMemoryDatabase("AnyDb"); });
+        services.AddTransient<IRedirectUriValidator, RedirectValidator>();
     }
 }
 

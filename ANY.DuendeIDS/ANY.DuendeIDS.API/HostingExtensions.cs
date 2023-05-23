@@ -14,9 +14,10 @@ internal static class HostingExtensions
         {
             builder.Services.ConfigDevelopExtension();
         }
-
-
-        builder.Services.ConfigDbContext();
+        else
+        {
+            builder.Services.ConfigDbContext();
+        }
 
         builder.Services.ConfigIdentityServer();
 
