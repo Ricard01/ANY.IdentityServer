@@ -1,6 +1,3 @@
-using System.Text.Json;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
@@ -17,13 +14,13 @@ public static class AuthenticationExtension
                 options.Audience = "identityApi";
 
                 // it's recommended to check the type header to avoid "JWT confusion" attacks
-                // options.TokenValidationParameters = new TokenValidationParameters()
-                // {
-                //     ValidateActor = true,
-                //     ValidateAudience = true,
-                //     ValidateIssuerSigningKey = true,
-                //     ValidTypes = new[] { "at+jwt" }
-                // };
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateActor = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidTypes = new[] { "at+jwt" }
+                };
 
                 options.MapInboundClaims = false;
                 // options.Events = new JwtBearerEvents()
