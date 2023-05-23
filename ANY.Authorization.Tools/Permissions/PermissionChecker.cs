@@ -1,8 +1,6 @@
-using System;
 using System.ComponentModel;
-using System.Linq;
 
-namespace Any.AuthorizationTools.Permissions;
+namespace ANY.Authorization.Tools.Permissions;
 
 public static class PermissionChecker
 {

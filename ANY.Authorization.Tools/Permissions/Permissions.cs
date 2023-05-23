@@ -1,7 +1,6 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Any.AuthorizationTools.Permissions;
+namespace ANY.Authorization.Tools.Permissions;
 
     public enum Permissions : short
     {

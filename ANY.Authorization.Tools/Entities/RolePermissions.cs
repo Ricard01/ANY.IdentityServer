@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Any.AuthorizationTools.Permissions;
+using ANY.Authorization.Tools.Permissions;
 
-namespace Any.AuthorizationTools.Entities;
+namespace ANY.Authorization.Tools.Entities;
 
 public class RolePermissions
 {
@@ -22,7 +21,7 @@ public class RolePermissions
 
     
     [Required(AllowEmptyStrings = false)] //A role must have at least one role in it
-    private string _permissionsInRole;
+    private readonly string _permissionsInRole = null!;
     // /// <summary>
     // /// This returns the list of permissions in this role
     // /// </summary>

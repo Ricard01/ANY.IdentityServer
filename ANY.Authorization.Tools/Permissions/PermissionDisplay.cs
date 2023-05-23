@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Any.AuthorizationTools.Permissions;
+namespace ANY.Authorization.Tools.Permissions;
 
     public class PermissionDisplay
     {

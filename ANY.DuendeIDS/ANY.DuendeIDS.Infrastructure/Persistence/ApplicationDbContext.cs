@@ -1,15 +1,20 @@
+using ANY.Authorization.Tools.Entities;
 using ANY.DuendeIDS.Domain.Entities;
+using ANY.DuendeIDS.Infrastructure.Common.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ANY.DuendeIDS.Infrastructure.Persistence;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
+    
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
     }
+    
+    public DbSet<RolePermissions> RolePermissions => Set<RolePermissions>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
