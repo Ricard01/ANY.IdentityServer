@@ -8,14 +8,14 @@ public static class Config
         new IdentityResource[]
         {
             new IdentityResources.OpenId(),
-            new IdentityResources.Profile(),
+            new IdentityResources.Profile()
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
-        {
-            new ApiScope("identity.api"),
-            new ApiScope("scope2"),
+        {   
+            // admin users CRUD
+            new ApiScope("identity.api")
         };
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -42,10 +42,11 @@ public static class Config
 
                 AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
                 AllowedScopes = AllScopes,
+                
+                
                 AllowOfflineAccess = true,
                 RefreshTokenUsage = TokenUsage.ReUse,
                 RefreshTokenExpiration = TokenExpiration.Sliding,
-                //AllowedCorsOrigins={ "https://localhost:44451"},
             },
 
             // interactive client using code flow + pkce

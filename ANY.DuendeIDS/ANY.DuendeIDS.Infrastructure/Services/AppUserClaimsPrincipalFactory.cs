@@ -19,10 +19,10 @@ public class AppUserClaimsPrincipalFactory : UserClaimsPrincipalFactory<Applicat
     {
         var claimsIdentity = await base.GenerateClaimsAsync(user);
 
-        if (user.ProfilePictureUrl != null)
-        {
-            claimsIdentity.AddClaim(new Claim(JwtClaimTypes.GivenName, "hola2"));
-        }
+
+        claimsIdentity.AddClaim(new Claim("Permission", "hola"));
+        claimsIdentity.AddClaim(new Claim("Permission", "hola2"));
+
 
         return claimsIdentity;
     }
