@@ -6,13 +6,15 @@ namespace ANY.DuendeIDS.API;
 
 internal static class HostingExtensions
 {
-    public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
+    public static WebApplication ConfigureServices(this WebApplicationBuilder builder, IConfiguration configuration)
     {
         builder.Services.AddRazorPages();
 
         if (builder.Environment.IsDevelopment())
         {
-            builder.Services.ConfigDevelopExtension();
+            builder.Services.ConfigDevelopExtension(configuration);
+            
+            
         }
         else
         {

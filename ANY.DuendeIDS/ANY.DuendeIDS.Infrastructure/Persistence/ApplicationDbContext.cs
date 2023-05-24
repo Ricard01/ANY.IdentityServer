@@ -1,4 +1,3 @@
-using ANY.Authorization.Tools.Entities;
 using ANY.DuendeIDS.Domain.Entities;
 using ANY.DuendeIDS.Infrastructure.Common.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

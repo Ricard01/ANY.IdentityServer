@@ -1,4 +1,4 @@
-using ANY.Authorization.Tools.Entities;
+using ANY.DuendeIDS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ANY.DuendeIDS.Infrastructure.Common.Interfaces;

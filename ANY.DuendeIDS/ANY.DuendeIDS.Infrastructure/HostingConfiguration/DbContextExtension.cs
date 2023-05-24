@@ -8,7 +8,7 @@ public static class DbContextExtension
 {
     public static void ConfigDbContext(this IServiceCollection services)
     {
-
+       
         services.AddDbContext<ApplicationDbContext>(options =>
         {
 

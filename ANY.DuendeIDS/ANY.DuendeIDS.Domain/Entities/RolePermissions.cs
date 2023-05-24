@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using ANY.Authorization.Tools.Permissions;
 
-namespace ANY.Authorization.Tools.Entities;
+namespace ANY.DuendeIDS.Domain.Entities;
 
 public class RolePermissions
 {
@@ -25,5 +25,6 @@ public class RolePermissions
     // /// <summary>
     // /// This returns the list of permissions in this role
     // /// </summary>
-    public IEnumerable<Permissions.Permissions> PermissionsInRole => _permissionsInRole.UnpackPermissionsFromString(); 
+    public IEnumerable<Permissions> PermissionsInRole => _permissionsInRole.UnpackPermissionsFromString(); 
+
 }
