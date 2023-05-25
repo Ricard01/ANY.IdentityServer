@@ -7,8 +7,4 @@
         <RootNamespace>ANY.Authorization.Tools</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="Entities\" />
-    </ItemGroup>
-
 </Project>

@@ -11,8 +11,8 @@ public static class IdentityExtension
     public static void ConfigIdentityServer(this IServiceCollection services)
     {
         // Orden Comprobado y Correcto
-        services.AddIdentity<ApplicationUser, IdentityRole>()
-            // Doesnt work with OpendIdConnect .AddClaimsPrincipalFactory<AppUserClaimsPrincipalFactory>()
+        services.AddIdentity<ApplicationUser, ApplicationRole>()
+            // .AddClaimsPrincipalFactory<AppUserClaimsPrincipalFactory>() Doesnt work with OpendIdConnect 
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 

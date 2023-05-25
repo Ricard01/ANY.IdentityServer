@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ANY.DuendeIDS.Domain.Entities;
 
-public class ApplicationUser : IdentityUser
+public class ApplicationUser : IdentityUser<Guid>
 {
-    public string? ProfilePictureUrl { get; set; }
+    public string Name { get; set; } = null!;
+    public string? ProfilePictureUrl { get; init; }
 }

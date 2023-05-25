@@ -2,6 +2,7 @@ using ANY.Authorization.Tools.Permissions;
 using ANY.DuendeIDS.Domain.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
@@ -9,21 +10,25 @@ namespace ANY.DuendeIDS.Infrastructure.Persistence;
 
 public static class ApplicationDbSeed
 {
+    private const string AdminRole = "Administrator";
+
     public static void EnsureSeedData(WebApplication app)
     {
         using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
         var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
-        // context?.Database.Migrate();
+        context?.Database.Migrate();
 
         var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-        var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+
 
         Log.Debug("Seeding Data");
 
+
         if (!roleMgr.Roles.Any())
         {
-            CreateRoles(roleMgr);
+            CreateAdminRole(roleMgr);
         }
 
 
@@ -39,6 +44,7 @@ public static class ApplicationDbSeed
         var admin = new ApplicationUser
         {
             UserName = "admin",
+            Name = "John Doe",
             Email = "admin@gmail.com",
             ProfilePictureUrl = "https://avatars.githubusercontent.com/u/20118398?v=4"
         };
@@ -49,8 +55,8 @@ public static class ApplicationDbSeed
             throw new Exception(result.Errors.First().Description);
         }
 
-        result = userMgr.AddToRoleAsync(admin, "Administrator").Result;
-        
+        result = userMgr.AddToRoleAsync(admin, AdminRole).Result;
+
         if (!result.Succeeded)
         {
             throw new Exception(result.Errors.First().Description);
@@ -59,18 +65,25 @@ public static class ApplicationDbSeed
         Log.Information("User {Admin} created", admin.UserName);
     }
 
-    private static void CreateRoles(RoleManager<IdentityRole> roleMgr)
+    private static void CreateAdminRole(RoleManager<ApplicationRole> roleMgr)
     {
-        var roles = Enum.GetNames(typeof(Roles));
-        foreach (var role in roles)
-        {
-            var result = roleMgr.CreateAsync(new IdentityRole(role)).Result;
-            if (!result.Succeeded)
-            {
-                throw new Exception(result.Errors.First().Description);
-            }
+        var permissions = string.Join(", ", Enum.GetNames(typeof(Permissions))
+            .Where(x => x.EndsWith("AllAccess"))
+            .ToList()).TrimEnd();
 
-            Log.Information("Role {Role} created", role);
+        var role = new ApplicationRole
+        {
+            Name = AdminRole,
+            Permissions = permissions
+        };
+
+
+        var result = roleMgr.CreateAsync(role).Result;
+        if (!result.Succeeded)
+        {
+            throw new Exception(result.Errors.First().Description);
         }
+
+        Log.Information("Role {Role} created", role);
     }
 }
