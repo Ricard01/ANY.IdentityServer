@@ -37,7 +37,7 @@ public class WeatherForecastController : ControllerBase
     }
     
     
-    [HttpGet(Name = "GetPermissions")]
+    [HttpGet("Permissions")]
     [AllowAnonymous]
     public IEnumerable<Permissions> GetPermissionsEnumerable()
     {
