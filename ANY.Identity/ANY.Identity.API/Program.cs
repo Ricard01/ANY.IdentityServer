@@ -9,15 +9,17 @@ if (builder.Environment.IsDevelopment())
 {
     builder.Services.ConfDevelopment();
 }
+// Policy's and Handler 
+builder.Services.ConfigAuthorization();
 
 //JwtBearer
 builder.Services.ConfigAuthentication();
 
-// Policy's
-builder.Services.ConfigAuthorization();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle 
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "ANY.IdentitApi", Version = "v1" });

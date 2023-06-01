@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\ANY.Authorization.Tools\ANY.Authorization.Tools.csproj" />
       <ProjectReference Include="..\ANY.Identity.Infrastructure\ANY.Identity.Infrastructure.csproj" />
     </ItemGroup>
 

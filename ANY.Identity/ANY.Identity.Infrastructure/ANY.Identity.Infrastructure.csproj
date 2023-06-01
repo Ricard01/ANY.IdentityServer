@@ -7,14 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-        <HintPath>..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\6.0.16\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-      </Reference>
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <ProjectReference Include="..\..\ANY.Authorization.Tools\ANY.Authorization.Tools.csproj" />
     </ItemGroup>
 
 </Project>

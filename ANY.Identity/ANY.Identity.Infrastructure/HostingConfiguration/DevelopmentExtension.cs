@@ -9,7 +9,7 @@ public static class DevelopmentExtension
 
     public static void ConfDevelopment(this IServiceCollection services)
     {
-        services.AddTransient<IAuthorizationService, CheckAuthorizationService>();
+        // services.AddTransient<IAuthorizationService, CheckAuthorizationService>();
         
         // services.AddSingleton<IAuthorizationMiddlewareResultHandler,
         //     MyAuthorizationMiddlewareResultHandler>();

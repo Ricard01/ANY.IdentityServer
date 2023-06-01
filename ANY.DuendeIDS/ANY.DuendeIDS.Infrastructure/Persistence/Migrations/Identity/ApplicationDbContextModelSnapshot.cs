@@ -29,7 +29,11 @@ namespace ANY.DuendeIDS.Infrastructure.Persistence.Migrations.Identity
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("longtext")
-                        .HasColumnOrder(4);
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext")
+                        .HasColumnOrder(2);
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -39,10 +43,9 @@ namespace ANY.DuendeIDS.Infrastructure.Persistence.Migrations.Identity
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)")
-                        .HasColumnOrder(2);
+                        .HasColumnOrder(4);
 
                     b.Property<string>("Permissions")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnOrder(3);
 

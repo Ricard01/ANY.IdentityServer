@@ -7,4 +7,9 @@
         <RootNamespace>ANY.Authorization.Tools</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.16" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
 </Project>

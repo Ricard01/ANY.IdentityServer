@@ -6,6 +6,12 @@ public static class PermissionPackers
     {
         return permissions.Aggregate("", (s, permission) => s + (char)permission);
     }
+  
+    
+    public static string PackPermissions(this IEnumerable<Permissions> permissions)
+    {
+        return permissions.Aggregate("", (s, permission) => s + (char)permission);
+    }
 
     public static IEnumerable<Permissions> UnpackPermissionsFromString(this string packedPermissions)
     {

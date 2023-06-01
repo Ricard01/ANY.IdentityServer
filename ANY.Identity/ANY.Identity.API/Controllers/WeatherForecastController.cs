@@ -1,3 +1,5 @@
+using ANY.Authorization.Tools.Constants;
+using ANY.Authorization.Tools.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +23,8 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    [Authorize("RequireInteractiveUser")]
+    [RequiresPermission(Permissions.UserAllAccess)]
+    // [Authorize("RequireInteractiveUser")]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -31,5 +34,17 @@ public class WeatherForecastController : ControllerBase
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+    }
+    
+    
+    [HttpGet(Name = "GetPermissions")]
+    [AllowAnonymous]
+    public IEnumerable<Permissions> GetPermissionsEnumerable()
+    {
+        var claims = HttpContext.User.Claims;
+        var permissionsClaim =
+            claims?.SingleOrDefault(c => c.Type == PermissionConstants.ClaimType);
+        
+        return permissionsClaim?.Value.UnpackPermissionsFromString();
     }
 }

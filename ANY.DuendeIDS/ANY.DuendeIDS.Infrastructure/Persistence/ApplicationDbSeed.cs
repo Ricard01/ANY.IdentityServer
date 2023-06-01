@@ -1,5 +1,6 @@
 using ANY.Authorization.Tools.Permissions;
 using ANY.DuendeIDS.Domain.Entities;
+using Duende.IdentityServer.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -67,14 +68,20 @@ public static class ApplicationDbSeed
 
     private static void CreateAdminRole(RoleManager<ApplicationRole> roleMgr)
     {
-        var permissions = string.Join(", ", Enum.GetNames(typeof(Permissions))
-            .Where(x => x.EndsWith("AllAccess"))
-            .ToList()).TrimEnd();
+        var permissions =  Enum.GetValues<Permissions>()
+            .Where(p => Enum.GetName(typeof(Permissions), p )!.EndsWith(  "AllAccess"))
+            // .Cast<Permissions>()
+            .ToList();
+
+        var packPermissions = permissions.Aggregate("", (s, permission) => s + (char)permission);
 
         var role = new ApplicationRole
         {
             Name = AdminRole,
-            Permissions = permissions
+            Description = "Administrator has access to everything",
+            Permissions = packPermissions,
+            // Permissions = packPermissions,
+            // Permissions = permissions
         };
 
 
