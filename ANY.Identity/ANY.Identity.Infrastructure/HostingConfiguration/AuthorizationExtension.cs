@@ -1,7 +1,4 @@
-using ANY.Authorization.Tools.Constants;
-using ANY.Authorization.Tools.Permissions;
-using ANY.Authorization.Tools.Policy;
-using ANY.Identity.Infrastructure.Services;
+using ANY.Authorization.Tools.PolicyAuthorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,6 +1,5 @@
 using System.Security.Claims;
-using ANY.Authorization.Tools.Constants;
-using ANY.Authorization.Tools.Permissions;
+using ANY.Authorization.Tools;
 using ANY.DuendeIDS.Domain.Entities;
 using ANY.DuendeIDS.Infrastructure.Persistence;
 using Duende.IdentityServer.Extensions;
@@ -70,7 +69,7 @@ public class MyProfileService : IProfileService
                     .Select(r => r.Permissions).FirstOrDefaultAsync();
 
 
-                if (permInRole != null) claims.Add(new Claim(PermissionConstants.ClaimType, permInRole));
+                if (permInRole != null) claims.Add(new Claim(Constants.ClaimType, permInRole));
             }
         }
 

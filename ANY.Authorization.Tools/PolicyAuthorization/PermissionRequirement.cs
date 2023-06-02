@@ -1,15 +1,18 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace ANY.Authorization.Tools.Permissions;
+namespace ANY.Authorization.Tools.PolicyAuthorization;
 
 public class PermissionRequirement : IAuthorizationRequirement
 {
+    // public static string ClaimType => Constants.ClaimType;
+    public string[] Permissions { get; }
     
-    public string PermissionName { get; }
+    public PermissionOperator PermissionOperator { get; }
 
-    public PermissionRequirement(string permissionName)
+    public PermissionRequirement(PermissionOperator permissionOperator, string[] permissions)
     {
-        PermissionName = permissionName ?? throw new ArgumentNullException(nameof(permissionName));
+        PermissionOperator = permissionOperator;
+        Permissions = permissions ?? throw new ArgumentException("At least one permission is required.", nameof(permissions));
     }
     // public static string ClaimType => AppClaimTypes.Permissions;
     //
@@ -26,3 +29,4 @@ public class PermissionRequirement : IAuthorizationRequirement
     //     Permissions = permissions;
     // }
 }
+

@@ -10,7 +10,7 @@ public static class IdentityExtension
 {
     public static void ConfigIdentityServer(this IServiceCollection services)
     {
-        // Orden Comprobado y Correcto
+        // Order matter this is the correct order of services. 
         services.AddIdentity<ApplicationUser, ApplicationRole>()
             // .AddClaimsPrincipalFactory<AppUserClaimsPrincipalFactory>() Doesnt work with OpendIdConnect 
             .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -23,9 +23,8 @@ public static class IdentityExtension
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 
-
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
-                // options.EmitStaticAudienceClaim = true;
+                // options.EmitStaticAudienceClaim = true;  // emits audience resource
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
@@ -33,6 +32,6 @@ public static class IdentityExtension
             .AddInMemoryClients(Config.Clients)
             .AddAspNetIdentity<ApplicationUser>()
             .AddProfileService<MyProfileService>();
-         // Orden Matters
+        
     }
 }

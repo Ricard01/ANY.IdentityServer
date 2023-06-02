@@ -12,6 +12,7 @@ internal static class HostingExtensions
 
         if (builder.Environment.IsDevelopment())
         {
+            // DbContextConfiguration IRedirectValidator (if something when work with redirection on Identity Clients) 
             builder.Services.ConfigDevelopExtension(configuration);
             
             

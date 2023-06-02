@@ -1,6 +1,6 @@
-using ANY.Authorization.Tools.Permissions;
+
+using ANY.Authorization.Tools;
 using ANY.DuendeIDS.Domain.Entities;
-using Duende.IdentityServer.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -70,7 +70,6 @@ public static class ApplicationDbSeed
     {
         var permissions =  Enum.GetValues<Permissions>()
             .Where(p => Enum.GetName(typeof(Permissions), p )!.EndsWith(  "AllAccess"))
-            // .Cast<Permissions>()
             .ToList();
 
         var packPermissions = permissions.Aggregate("", (s, permission) => s + (char)permission);
@@ -80,8 +79,7 @@ public static class ApplicationDbSeed
             Name = AdminRole,
             Description = "Administrator has access to everything",
             Permissions = packPermissions,
-            // Permissions = packPermissions,
-            // Permissions = permissions
+           
         };
 
 

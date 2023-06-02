@@ -1,4 +1,7 @@
-namespace ANY.Authorization.Tools.Permissions;
+// Copyright (c) 2018 Jon P Smith, GitHub: JonPSmith, web: http://www.thereformedprogrammer.net/
+// Licensed under MIT license. See License.txt in the project root for license information.
+
+namespace ANY.Authorization.Tools;
 
 public static class PermissionPackers
 {
@@ -6,7 +9,6 @@ public static class PermissionPackers
     {
         return permissions.Aggregate("", (s, permission) => s + (char)permission);
     }
-  
     
     public static string PackPermissions(this IEnumerable<Permissions> permissions)
     {

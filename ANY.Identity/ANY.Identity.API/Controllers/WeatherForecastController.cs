@@ -1,5 +1,5 @@
-using ANY.Authorization.Tools.Constants;
-using ANY.Authorization.Tools.Permissions;
+using ANY.Authorization.Tools;
+using ANY.Authorization.Tools.PolicyAuthorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +7,6 @@ namespace ANY.Identity.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -23,7 +22,7 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    [RequiresPermission(Permissions.UserAllAccess)]
+    [Requires(Permissions.OrderAllAccess)]
     // [Authorize("RequireInteractiveUser")]
     public IEnumerable<WeatherForecast> Get()
     {
@@ -35,16 +34,38 @@ public class WeatherForecastController : ControllerBase
             })
             .ToArray();
     }
-    
-    
+
+
     [HttpGet("Permissions")]
     [AllowAnonymous]
     public IEnumerable<Permissions> GetPermissionsEnumerable()
     {
         var claims = HttpContext.User.Claims;
         var permissionsClaim =
-            claims?.SingleOrDefault(c => c.Type == PermissionConstants.ClaimType);
-        
-        return permissionsClaim?.Value.UnpackPermissionsFromString();
+            claims?.SingleOrDefault(c => c.Type == Constants.ClaimType);
+
+        return permissionsClaim?.Value.UnpackPermissionsFromString()!;
+    }
+
+    [HttpGet("And")]
+    [Requires(PermissionOperator.And, Permissions.UserAllAccess, Permissions.OrderCreate)]
+    public IEnumerable<Permissions> GetAnd()
+    {
+        var claims = HttpContext.User.Claims;
+        var permissionsClaim =
+            claims?.SingleOrDefault(c => c.Type == Constants.ClaimType);
+
+        return permissionsClaim?.Value.UnpackPermissionsFromString()!;
+    }
+
+    [HttpGet("Or")]
+    [Requires(PermissionOperator.Or, Permissions.UserAllAccess, Permissions.OrderCreate)]
+    public IEnumerable<Permissions> GetOr()
+    {
+        var claims = HttpContext.User.Claims;
+        var permissionsClaim =
+            claims?.SingleOrDefault(c => c.Type == Constants.ClaimType);
+
+        return permissionsClaim?.Value.UnpackPermissionsFromString()!;
     }
 }
