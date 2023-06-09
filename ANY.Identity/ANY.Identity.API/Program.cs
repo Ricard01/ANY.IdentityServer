@@ -1,21 +1,28 @@
+using System.Reflection;
 using ANY.Identity.Infrastructure.HostingConfiguration;
+using ANY.Identity.Infrastructure.Persistence;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 builder.Services.AddControllers();
+
+builder.Services.ConfigDbContext(configuration);
+
+// Identity UserRepository y RolRepository
+builder.Services.ConfigIdentity();
 
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.ConfDevelopment();
 }
+
 // Policy's and Handler 
 builder.Services.ConfigAuthorization();
 
 //JwtBearer
 builder.Services.ConfigAuthentication();
-
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle 
 builder.Services.AddEndpointsApiExplorer();
@@ -51,9 +58,9 @@ builder.Services.AddSwaggerGen(c =>
                 new List<string>()
             }
         });
-    }
-    
-    );
+    });
+
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(ApplicationDbContext)));
 
 var app = builder.Build();
 

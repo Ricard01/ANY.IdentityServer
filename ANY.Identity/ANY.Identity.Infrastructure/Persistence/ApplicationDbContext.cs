@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ANY.DuendeIDS.Infrastructure.Persistence;
+namespace ANY.Identity.Infrastructure.Persistence;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid,
     IdentityUserClaim<Guid>, ApplicationUserRole, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>,
@@ -17,12 +17,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
-        builder.Ignore<IdentityUserToken<Guid>>();
-        builder.Ignore<IdentityUserLogin<Guid>>();
-        builder.Ignore<IdentityUserClaim<Guid>>();
-        builder.Ignore<IdentityRoleClaim<Guid>>();
-
 
         builder.Entity<ApplicationUser>(b =>
         {
@@ -39,7 +33,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
         });
-
+        
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

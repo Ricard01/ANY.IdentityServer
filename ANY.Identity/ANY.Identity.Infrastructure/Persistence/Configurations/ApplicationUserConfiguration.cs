@@ -2,9 +2,9 @@ using ANY.DuendeIDS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ANY.DuendeIDS.Infrastructure.Persistence.Configurations;
+namespace ANY.Identity.Infrastructure.Persistence.Configurations;
 
-public class ApplicationUserConfiguraiton : IEntityTypeConfiguration<ApplicationUser>
+public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
