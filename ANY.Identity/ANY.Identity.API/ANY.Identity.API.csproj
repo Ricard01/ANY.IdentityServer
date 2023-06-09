@@ -15,4 +15,8 @@
       <ProjectReference Include="..\ANY.Identity.Infrastructure\ANY.Identity.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Services\" />
+    </ItemGroup>
+
 </Project>
