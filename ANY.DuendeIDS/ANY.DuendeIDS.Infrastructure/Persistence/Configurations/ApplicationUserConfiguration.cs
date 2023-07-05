@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ANY.DuendeIDS.Infrastructure.Persistence.Configurations;
 
-public class ApplicationUserConfiguraiton : IEntityTypeConfiguration<ApplicationUser>
+public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        builder.ToTable("Users");
+        builder.ToTable("ANY.Users");
 
         builder.Property(u => u.Name).IsRequired();
 

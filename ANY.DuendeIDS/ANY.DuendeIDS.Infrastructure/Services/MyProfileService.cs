@@ -69,7 +69,7 @@ public class MyProfileService : IProfileService
                     .Select(r => r.Permissions).FirstOrDefaultAsync();
 
 
-                if (permInRole != null) claims.Add(new Claim(Constants.ClaimType, permInRole));
+                if (permInRole != null) claims.Add(new Claim(Constants.ClaimTypePermissions, permInRole));
             }
         }
 

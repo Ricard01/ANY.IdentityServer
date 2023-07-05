@@ -10,18 +10,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
     IdentityUserClaim<Guid>, ApplicationUserRole, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>,
     IdentityUserToken<Guid>>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    {
-    }
+    
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
-        builder.Ignore<IdentityUserToken<Guid>>();
-        builder.Ignore<IdentityUserLogin<Guid>>();
-        builder.Ignore<IdentityUserClaim<Guid>>();
-        builder.Ignore<IdentityRoleClaim<Guid>>();
+        
+        // builder.Ignore<IdentityUserToken<Guid>>();
+        // builder.Ignore<IdentityUserLogin<Guid>>();
+        // builder.Ignore<IdentityUserClaim<Guid>>(); // Needed by Ef
+        // builder.Ignore<IdentityRoleClaim<Guid>>();
 
 
         builder.Entity<ApplicationUser>(b =>

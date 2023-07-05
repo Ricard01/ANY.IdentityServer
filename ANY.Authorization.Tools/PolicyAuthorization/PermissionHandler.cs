@@ -12,12 +12,12 @@ public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
         // https://blog.joaograssi.com/posts/2021/asp-net-core-protecting-api-endpoints-with-dynamic-policies/
 
         var packedClaims =
-            context.User.Claims.SingleOrDefault(c => c.Type == Constants.ClaimType);
+            context.User.Claims.SingleOrDefault(c => c.Type == Constants.ClaimTypePermissions);
 
         // If user doesnt have claims exits
         if (packedClaims == null)
         {
-            Log.Warning("Current user's doesn't have claims");
+            Log.Error("Current user's doesn't have claims");
             context.Fail();
             return Task.CompletedTask;
         }

@@ -1,6 +1,5 @@
 using System.Security.Claims;
 using ANY.DuendeIDS.Domain.Entities;
-using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 

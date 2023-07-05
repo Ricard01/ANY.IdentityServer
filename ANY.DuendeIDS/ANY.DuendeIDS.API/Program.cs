@@ -1,5 +1,4 @@
 ﻿using ANY.DuendeIDS.API;
-using ANY.DuendeIDS.Infrastructure.Persistence;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration()

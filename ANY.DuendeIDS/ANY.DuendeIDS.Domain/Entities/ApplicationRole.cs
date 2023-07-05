@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Identity;
 
 namespace ANY.DuendeIDS.Domain.Entities;
@@ -14,4 +15,5 @@ public class ApplicationRole : IdentityRole<Guid>
 
     
     public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
+
 }

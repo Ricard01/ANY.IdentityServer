@@ -8,6 +8,6 @@ public class ApplicationUserRoleConfiguration : IEntityTypeConfiguration<Applica
 {
     public void Configure(EntityTypeBuilder<ApplicationUserRole> builder)
     {
-        builder.ToTable("UserRoles");
+        builder.ToTable("ANY.UserRoles");
     }
 }

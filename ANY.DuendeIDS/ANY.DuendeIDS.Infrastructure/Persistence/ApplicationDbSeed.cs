@@ -1,4 +1,5 @@
 
+using System.Diagnostics.CodeAnalysis;
 using ANY.Authorization.Tools;
 using ANY.DuendeIDS.Domain.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,8 @@ namespace ANY.DuendeIDS.Infrastructure.Persistence;
 public static class ApplicationDbSeed
 {
     private const string AdminRole = "Administrator";
-
+    private const string AdminUser = "Admin";
+    
     public static void EnsureSeedData(WebApplication app)
     {
         using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
@@ -25,15 +27,14 @@ public static class ApplicationDbSeed
 
 
         Log.Debug("Seeding Data");
-
-
-        if (!roleMgr.Roles.Any())
+        
+        if (!roleMgr.RoleExistsAsync(AdminRole).Result)
         {
             CreateAdminRole(roleMgr);
         }
 
 
-        var admin = userMgr.FindByNameAsync("admin").Result;
+        var admin = userMgr.FindByNameAsync(AdminUser).Result;
 
         if (admin != null) return;
 
@@ -44,7 +45,7 @@ public static class ApplicationDbSeed
     {
         var admin = new ApplicationUser
         {
-            UserName = "admin",
+            UserName = AdminUser,
             Name = "John Doe",
             Email = "admin@gmail.com",
             ProfilePictureUrl = "https://avatars.githubusercontent.com/u/20118398?v=4"

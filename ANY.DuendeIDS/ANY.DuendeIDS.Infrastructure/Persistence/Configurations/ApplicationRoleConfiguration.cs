@@ -8,8 +8,8 @@ public class ApplicationRoleConfiguration : IEntityTypeConfiguration<Application
 {
     public void Configure(EntityTypeBuilder<ApplicationRole> builder)
     {
-        builder.ToTable("Roles");
-
+        builder.ToTable("ANY.Roles");
+         
         builder.Property(r => r.Id).HasColumnOrder(0);
         builder.Property(r => r.Name).HasColumnOrder(1);
         builder.Property(r => r.Description).HasColumnOrder(2);
